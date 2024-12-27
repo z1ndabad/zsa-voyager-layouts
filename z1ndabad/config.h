@@ -10,7 +10,7 @@
 
 #define QUICK_TAP_TERM 0
 
-#define COMBO_TERM 20
+#define COMBO_TERM 30
 #define COMBO_SHOULD_TRIGGER
 
 #undef RGB_MATRIX_HUE_STEP
