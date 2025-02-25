@@ -13,11 +13,11 @@ enum custom_keycodes {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT_voyager(
-        KC_GRAVE, KC_1, KC_2, KC_3, KC_4, KC_5,                     KC_6, KC_7, KC_8, KC_9, KC_0, KC_DELETE,
-        KC_BSPC, KC_Q, KC_W, KC_E, KC_R, KC_T,                      KC_Y, KC_U, KC_I, KC_O, KC_MINUS, KC_ENTER,
-        KC_TAB, KC_A, KC_S, KC_D, KC_F, KC_G,                       KC_H, KC_J, KC_K, KC_L, KC_P, KC_QUOTE,
-        CW_TOGG, KC_Z, KC_X, KC_C, KC_V, KC_B,                      KC_N, KC_M, KC_COMMA, KC_DOT, KC_SLASH, TO(3),
-        LT(1, KC_SPACE), LT(3, KC_ENTER),                           OSM(MOD_RSFT), KC_BSPC),
+        KC_GRAVE, KC_1, KC_2, KC_3, KC_4, KC_5,                                 KC_6, KC_7, KC_8, KC_9, KC_0, KC_DELETE,
+        KC_BSPC, KC_Q, KC_W, KC_E, KC_R, KC_T,                                  KC_Y, KC_U, KC_I, KC_O, KC_MINUS, KC_ENTER,
+        KC_TAB, LGUI_T(KC_A), LALT_T(KC_S), LSFT_T(KC_D), LCTL_T(KC_F), KC_G,   KC_H, RCTL_T(KC_J), RSFT_T(KC_K), LALT_T(KC_L), RGUI_T(KC_P), KC_QUOTE,
+        CW_TOGG, KC_Z, KC_X, KC_C, KC_V, KC_B,                                  KC_N, KC_M, KC_COMMA, KC_DOT, KC_SLASH, TO(3),
+        LT(1, KC_SPACE), LT(3, KC_ENTER),                                       OSM(MOD_RSFT), KC_BSPC),
 
     [1] = LAYOUT_voyager(
         KC_ESCAPE, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5,                       KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11,
@@ -35,15 +35,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [3] = LAYOUT_voyager(
         RGB_TOG, TOGGLE_LAYER_COLOR, RGB_MODE_FORWARD, RGB_SLD, RGB_VAD, RGB_VAI,           KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP, KC_BRIGHTNESS_DOWN, KC_BRIGHTNESS_UP, KC_TRANSPARENT, LALT(LCTL(KC_DELETE)),
-        RGB_HUD, RGB_HUI, KC_KP_7, KC_KP_8, KC_KP_9, KC_KP_MINUS,                              KC_HOME, KC_PGDN, KC_PAGE_UP, KC_END, KC_TRANSPARENT, KC_TRANSPARENT,
-        HSV_219_255_255, KC_TRANSPARENT, KC_KP_4, KC_KP_5, KC_KP_6, KC_KP_PLUS,             KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_TRANSPARENT, KC_TRANSPARENT,
+        RGB_HUD, RGB_HUI, KC_KP_7, KC_KP_8, KC_KP_9, KC_KP_MINUS,                              KC_HOME, KC_PGDN, KC_PAGE_UP, KC_END, KC_TRANSPARENT, DT_UP,
+        HSV_219_255_255, KC_TRANSPARENT, KC_KP_4, KC_KP_5, KC_KP_6, KC_KP_PLUS,             KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, DT_PRNT, DT_DOWN,
         HSV_169_255_255, HSV_0_255_255, KC_KP_1, KC_KP_2, KC_KP_3, KC_KP_0,                 KC_AUDIO_MUTE, KC_MEDIA_PREV_TRACK, KC_MEDIA_PLAY_PAUSE, KC_MEDIA_NEXT_TRACK, KC_NUM, TO(0),
         KC_TRANSPARENT, KC_TRANSPARENT,                                                     KC_TRANSPARENT, KC_TRANSPARENT),
 
     [4] = LAYOUT_voyager(
         KC_ESCAPE, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5,                                   KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11,
-        KC_TRANSPARENT, KC_TRANSPARENT, KC_KP_7, KC_KP_8, KC_KP_9, KC_KP_MINUS,            KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_TRANSPARENT, KC_TRANSPARENT,
-        KC_TRANSPARENT, KC_TRANSPARENT, KC_KP_4, KC_KP_5, KC_KP_6, KC_KP_PLUS,          KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_TRANSPARENT, KC_TRANSPARENT,
+        KC_TRANSPARENT, KC_TRANSPARENT, KC_KP_7, KC_KP_8, KC_KP_9, KC_KP_MINUS,            KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_TRANSPARENT, DT_UP,
+        KC_TRANSPARENT, KC_TRANSPARENT, KC_KP_4, KC_KP_5, KC_KP_6, KC_KP_PLUS,          KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, DT_PRNT, DT_DOWN,
         KC_TRANSPARENT, TO(2), KC_KP_1, KC_KP_2, KC_KP_3, KC_KP_0,                      KC_AUDIO_MUTE, KC_MEDIA_PREV_TRACK, KC_MEDIA_PLAY_PAUSE, KC_MEDIA_NEXT_TRACK, KC_NUM, KC_TRANSPARENT,
         KC_TRANSPARENT, KC_TRANSPARENT,                                                 KC_TRANSPARENT, KC_TRANSPARENT),
 };
@@ -51,21 +51,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 const uint16_t PROGMEM combo0[] = {KC_GRAVE, KC_1, COMBO_END};
 const uint16_t PROGMEM combo1[] = {KC_X, KC_C, COMBO_END};
-const uint16_t PROGMEM combo2[] = {KC_A, KC_Z, COMBO_END};
-const uint16_t PROGMEM combo3[] = {KC_A, KC_S, COMBO_END};
-const uint16_t PROGMEM combo4[] = {KC_D, KC_S, COMBO_END};
-const uint16_t PROGMEM combo5[] = {KC_F, KC_D, COMBO_END};
-const uint16_t PROGMEM combo6[] = {KC_J, KC_K, COMBO_END};
-const uint16_t PROGMEM combo7[] = {KC_K, KC_L, COMBO_END};
-const uint16_t PROGMEM combo8[] = {KC_L, KC_P, COMBO_END};
-const uint16_t PROGMEM combo9[] = {KC_P, KC_SLASH, COMBO_END};
 
 combo_t key_combos[] = {
-    COMBO(combo0, TG(2)), COMBO(combo1, KC_ESCAPE), COMBO(combo2, OSM(MOD_LGUI)), COMBO(combo3, OSM(MOD_LALT)), COMBO(combo4, OSM(MOD_LSFT)), COMBO(combo5, OSM(MOD_LCTL)), COMBO(combo6, OSM(MOD_RCTL)), COMBO(combo7, OSM(MOD_RSFT)), COMBO(combo8, OSM(MOD_RALT)), COMBO(combo9, OSM(MOD_RGUI)),
+    COMBO(combo0, TG(2)),
+    COMBO(combo1, KC_ESCAPE),
 };
 
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
-    /* Disable combo all combos on layer '2' */
+    /* If on the gaming layer, disable all combos except gaming layer toggle and ESC */
     if (layer_state_is(2) && combo_index != 0 && combo_index != 1) {
         return false;
     }
@@ -77,7 +70,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case KC_A:
             return TAPPING_TERM + 50;
-        case KC_QUOTE:
+        case KC_P:
             return TAPPING_TERM + 50;
         case KC_CIRC:
             return TAPPING_TERM + 50;
