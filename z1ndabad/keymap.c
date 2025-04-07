@@ -35,14 +35,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [3] = LAYOUT_voyager(
         RGB_TOG, TOGGLE_LAYER_COLOR, RGB_MODE_FORWARD, RGB_SLD, RGB_VAD, RGB_VAI,           KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP, KC_BRIGHTNESS_DOWN, KC_BRIGHTNESS_UP, KC_TRANSPARENT, LALT(LCTL(KC_DELETE)),
-        RGB_HUD, RGB_HUI, KC_KP_7, KC_KP_8, KC_KP_9, KC_KP_MINUS,                              KC_HOME, KC_PGDN, KC_PAGE_UP, KC_END, KC_TRANSPARENT, DT_UP,
-        HSV_219_255_255, KC_TRANSPARENT, KC_KP_4, KC_KP_5, KC_KP_6, KC_KP_PLUS,             KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, DT_PRNT, DT_DOWN,
+        RGB_HUD, RGB_HUI, KC_KP_7, KC_KP_8, KC_KP_9, KC_KP_MINUS,                           KC_HOME, KC_PGDN, KC_PAGE_UP, KC_END, DT_PRNT, DT_UP,
+        HSV_219_255_255, KC_TRANSPARENT, KC_KP_4, KC_KP_5, KC_KP_6, KC_KP_PLUS,             KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_PRINT_SCREEN, DT_DOWN,
         HSV_169_255_255, HSV_0_255_255, KC_KP_1, KC_KP_2, KC_KP_3, KC_KP_0,                 KC_AUDIO_MUTE, KC_MEDIA_PREV_TRACK, KC_MEDIA_PLAY_PAUSE, KC_MEDIA_NEXT_TRACK, KC_NUM, TO(0),
         KC_TRANSPARENT, KC_TRANSPARENT,                                                     KC_TRANSPARENT, KC_TRANSPARENT),
 
     [4] = LAYOUT_voyager(
         KC_ESCAPE, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5,                                   KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11,
-        KC_TRANSPARENT, KC_TRANSPARENT, KC_KP_7, KC_KP_8, KC_KP_9, KC_KP_MINUS,            KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_TRANSPARENT, DT_UP,
+        KC_TRANSPARENT, KC_TRANSPARENT, KC_KP_7, KC_KP_8, KC_KP_9, KC_KP_MINUS,         KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_TRANSPARENT, DT_UP,
         KC_TRANSPARENT, KC_TRANSPARENT, KC_KP_4, KC_KP_5, KC_KP_6, KC_KP_PLUS,          KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, DT_PRNT, DT_DOWN,
         KC_TRANSPARENT, TO(2), KC_KP_1, KC_KP_2, KC_KP_3, KC_KP_0,                      KC_AUDIO_MUTE, KC_MEDIA_PREV_TRACK, KC_MEDIA_PLAY_PAUSE, KC_MEDIA_NEXT_TRACK, KC_NUM, KC_TRANSPARENT,
         KC_TRANSPARENT, KC_TRANSPARENT,                                                 KC_TRANSPARENT, KC_TRANSPARENT),
@@ -77,6 +77,35 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         default:
             return TAPPING_TERM;
     }
+}
+
+bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t *tap_hold_record, uint16_t other_keycode, keyrecord_t *other_record) {
+    // Allow one-handed chords within TAPPING_TERM for
+    switch (tap_hold_keycode) {
+        // Layer switches
+        case LT(1, KC_SPACE):
+            return true;
+            break;
+
+        case LT(3, KC_ENTER):
+            return true;
+            break;
+
+        // alt-tab
+        case LALT_T(KC_S):
+            if (other_keycode == KC_TAB) {
+                return true;
+            }
+
+        // ctrl-backspace
+        case RCTL_T(KC_J):
+            if (other_keycode == KC_BSPC) {
+                return true;
+            }
+            break;
+    }
+    // Otherwise block chords on the same hand that PERMISSIVE_HOLD would allow within TAPPING_TERM
+    return get_chordal_hold_default(tap_hold_record, other_record);
 }
 
 extern rgb_config_t rgb_matrix_config;

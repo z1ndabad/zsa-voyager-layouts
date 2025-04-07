@@ -4,7 +4,8 @@
 */
 
 #undef TAPPING_TERM
-#define TAPPING_TERM 150
+#define TAPPING_TERM 300
+#define CHORDAL_HOLD
 
 #define PERMISSIVE_HOLD
 
