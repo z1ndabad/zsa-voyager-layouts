@@ -101,6 +101,13 @@ bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t *tap_hold_record, u
                 return true;
             }
             break;
+
+        // cut, copy, paste
+        case LCTL_T(KC_F):
+            if (other_keycode == KC_X || other_keycode == KC_C || other_keycode == KC_V) {
+                return true;
+            }
+            break;
     }
     // Otherwise block chords on the same hand that PERMISSIVE_HOLD would allow within TAPPING_TERM
     return get_chordal_hold_default(tap_hold_record, other_record);
